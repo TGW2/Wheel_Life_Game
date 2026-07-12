@@ -1,7 +1,14 @@
 package ui;
 
+import javax.swing.*;
+import java.util.*;
+
+import model.Player;
+
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Welcome to my project!");
+        GameApp g = new GameApp();
+       g.runGame();
+        
     }
 }
