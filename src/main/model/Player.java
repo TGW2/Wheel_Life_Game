@@ -31,6 +31,7 @@ public class Player {
         playerWisdom = 60;
         playerSan = 30;
         playerMood = 30;
+        achievementMade = new ArrayList<>();
     }
 
     public void addPlayerSan(int san) {

@@ -55,14 +55,8 @@ public class EventLibraryTest {
     // is reached
     @Test
     public void testRelationshipUnlocksBrokeUpAndEngaged() {
-        Event relationshipEvent = new Event(
-                "In a lovership",
-                22,
-                100,
-                10,
-                10,
-                "In a lovership");
-        eventLibrary.addGoneThroughEvents(relationshipEvent);
+        Event InAlovership = new Event("In a lovership",22,100,10,10,"In a lovership");
+        eventLibrary.addGoneThroughEvents(InAlovership);
         ArrayList<Event> possibleEvents = eventLibrary.allPossibleEvents(23);
         boolean containsBrokeUp = false;
         boolean containsEngaged = false;
@@ -122,5 +116,89 @@ public class EventLibraryTest {
         p4.reducePlayerMood(10);
         assertEquals(21, p4.getPlayerSan());
         assertEquals(30, p4.getPlayerMood());
+    }
+
+    @Test
+    void testPrerequisiteEventAlternationBrokeUp() {
+        Event inAlovership = new Event("In a lovership", 0, 100, 0, 0, "In a lovership");
+        Event engaged = new Event("Engaged", 0, 100, 0, 0, "Engaged");
+        Event married = new Event("Married", 0, 100, 0, 0, "Get married");
+        Event brokeUp = new Event("Broke up", 0, 100, 0, 0, "Broke up");
+
+        eventLibrary.addGoneThroughEvents(inAlovership);
+        eventLibrary.addGoneThroughEvents(engaged);
+        eventLibrary.addGoneThroughEvents(married);
+        eventLibrary.addGoneThroughEvents(brokeUp);
+
+        eventLibrary.prerequistieEventAlternation();
+
+        assertFalse(eventLibrary.goneThroughEvents().contains("In a lovership"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Engaged"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Get married"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Broke up"));
+    }
+
+    @Test
+    void testPrerequisiteEventAlternationDivorced() {
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "In a lovership"));
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Engaged"));
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Get married"));
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Divorced"));
+
+        eventLibrary.prerequistieEventAlternation();
+
+        assertFalse(eventLibrary.goneThroughEvents().contains("In a lovership"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Engaged"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Get married"));
+        assertFalse(eventLibrary.goneThroughEvents().contains("Divorced"));
+    }
+
+    @Test
+    void testPrerequisiteEventAlternationLoveInMath() {
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "intoMath"));
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "loveInMath"));
+
+        eventLibrary.prerequistieEventAlternation();
+
+        assertFalse(eventLibrary.goneThroughEvents().contains("intoMath"));
+        assertTrue(eventLibrary.goneThroughEvents().contains("loveInMath"));
+    }
+
+    @Test
+    void testPrerequisiteEventAlternationMasterInMath() {
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "loveInMath"));
+        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "masterInMath"));
+        eventLibrary.prerequistieEventAlternation();
+        assertFalse(eventLibrary.goneThroughEvents().contains("loveInMath"));
+        assertTrue(eventLibrary.goneThroughEvents().contains("masterInMath"));
+    }
+
+    @Test
+    void testSpinWheelForAgeReturnsEvent() {
+        Event result = eventLibrary.spingWheelForAge(10);
+        assertNotNull(result);
+        assertTrue(result.canHappenAtAge(10));
+        assertTrue(eventLibrary.goneThroughEvents().contains(result.getEventCode()));
+    }
+
+    @Test
+    void testSpinWheelForAgeReturnsNull() {
+        Event result = eventLibrary.spingWheelForAge(101);
+        assertNull(result);
+        assertTrue(eventLibrary.goneThroughEvents().isEmpty());
+    }
+
+    @Test
+    void testRoundCheckAtAgeMultipleOfTen() {
+        Player player = new Player("Player", "Eu", 20);
+        eventLibrary.roundCheck(player);
+        assertEquals(63, player.getPlayerWisdom());
+    }
+
+    @Test
+    void testRoundCheckAtAgeNotMultipleOfTen() {
+        Player player = new Player("Player", "Eu", 21);
+        eventLibrary.roundCheck(player);
+        assertEquals(60, player.getPlayerWisdom());
     }
 }
