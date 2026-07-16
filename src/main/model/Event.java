@@ -1,75 +1,82 @@
 package model;
 
 import java.util.ArrayList;
+/**
+ * Represents a game event that can affect the player's attributes.
+ * Events are standardized and stored in the EventLibrary for current play.
+ */
 
-//making standard for events in order thay can be standlarized stored in EventLirary
 public class Event {
-    String eventDescription;
-    int minAge;
-    int maxAge;
-    int sanChange;
-    int moodChange;
-    int wisdomChange;
-    String eventCode;
-    ArrayList<String> prerequisites;
+  String eventDescription;
+  int minAge;
+  int maxAge;
+  int sanChange;
+  int moodChange;
+  int wisdomChange;
+  String eventCode;
+  ArrayList<String> prerequisites;
 
-    // requires: minAge>=0, maxAge>=minAge
-    // modifies: this
-    // effects: set up an event, with events description and age range
-    public Event(String eventDescription, int minAge, int maxAge, int sanChange, int moodChange, String eventCode) {
-        this.eventDescription = eventDescription;
-        this.minAge = minAge;
-        this.maxAge = maxAge;
-        this.sanChange = sanChange;
-        this.moodChange = moodChange;
-        this.eventCode = eventCode;
-        this.prerequisites = new ArrayList<>();
-    }
+  /** 
+  * requires: minAge>=0, maxAge>=minAge.
+  * modifies: this.
+  * effects: set up an event, with events description and age range.
+  */
 
-    // effects: get events description
-    public String getEventDescription() {
-        return eventDescription;
-    }
+  public Event(String eventDescription, int minAge, int maxAge,
+      int sanChange, int moodChange, String eventCode) {
+    this.eventDescription = eventDescription;
+    this.minAge = minAge;
+    this.maxAge = maxAge;
+    this.sanChange = sanChange;
+    this.moodChange = moodChange;
+    this.eventCode = eventCode;
+    this.prerequisites = new ArrayList<>();
+  }
 
-    // effects: add prerequisties to a String list in order for those events need
-    // prerequisties to check to unlock events
-    // modifies: prerequisites
-    public void addPrerequisite(String prerequisiteCode) {
-        prerequisites.add(prerequisiteCode);
-    }
+  // effects: get events description
+  public String getEventDescription() {
+    return eventDescription;
+  }
 
-    // effects: return all prerequisties
-    // modifies: prerequisites
-    public ArrayList<String> getPrerequisites() {
-        return prerequisites;
-    }
+  // effects: add prerequisties to a String list in order for those events need
+  // prerequisties to check to unlock events
+  // modifies: prerequisites
+  public void addPrerequisite(String prerequisiteCode) {
+    prerequisites.add(prerequisiteCode);
+  }
 
-    // effects: get each events' event code in order to store prerequistie
-    public String getEventCode() {
-        return eventCode;
-    }
+  // effects: return all prerequisties
+  // modifies: prerequisites
+  public ArrayList<String> getPrerequisites() {
+    return prerequisites;
+  }
 
-    // effects: get min age
-    public int getMinAge() {
-        return minAge;
-    }
+  // effects: get each events' event code in order to store prerequistie
+  public String getEventCode() {
+    return eventCode;
+  }
 
-    // efects: get max age
-    public int getMaxAge() {
-        return maxAge;
-    }
+  // effects: get min age
+  public int getMinAge() {
+    return minAge;
+  }
 
-    public int getSanChange() {
-        return sanChange;
-    }
+  // efects: get max age
+  public int getMaxAge() {
+    return maxAge;
+  }
 
-    public int getMoodChange() {
-        return moodChange;
-    }
+  public int getSanChange() {
+    return sanChange;
+  }
 
-    // requires: age>=0
-    // effects: identify whether can happen at that age
-    public boolean canHappenAtAge(int age) {
-        return age >= minAge && age <= maxAge;
-    }
+  public int getMoodChange() {
+    return moodChange;
+  }
+
+  // requires: age>=0
+  // effects: identify whether can happen at that age
+  public boolean canHappenAtAge(int age) {
+    return age >= minAge && age <= maxAge;
+  }
 }

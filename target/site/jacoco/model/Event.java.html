@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Event.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project-g6h9c</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">Event.java</span></div><h1>Event.java</h1><pre class="source lang-java linenums">package model;
+
+import java.util.ArrayList;
+
+//making standard for events in order thay can be standlarized stored in EventLirary
+public class Event {
+    String eventDescription;
+    int minAge;
+    int maxAge;
+    int sanChange;
+    int moodChange;
+    int wisdomChange;
+    String eventCode;
+    ArrayList&lt;String&gt; prerequisites;
+
+    // requires: minAge&gt;=0, maxAge&gt;=minAge
+    // modifies: this
+    // effects: set up an event, with events description and age range
+<span class="fc" id="L19">    public Event(String eventDescription, int minAge, int maxAge, int sanChange, int moodChange, String eventCode) {</span>
+<span class="fc" id="L20">        this.eventDescription = eventDescription;</span>
+<span class="fc" id="L21">        this.minAge = minAge;</span>
+<span class="fc" id="L22">        this.maxAge = maxAge;</span>
+<span class="fc" id="L23">        this.sanChange = sanChange;</span>
+<span class="fc" id="L24">        this.moodChange = moodChange;</span>
+<span class="fc" id="L25">        this.eventCode = eventCode;</span>
+<span class="fc" id="L26">        this.prerequisites = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L27">    }</span>
+
+    // effects: get events description
+    public String getEventDescription() {
+<span class="fc" id="L31">        return eventDescription;</span>
+    }
+
+    // effects: add prerequisties to a String list in order for those events need
+    // prerequisties to check to unlock events
+    // modifies: prerequisites
+    public void addPrerequisite(String prerequisiteCode) {
+<span class="fc" id="L38">        prerequisites.add(prerequisiteCode);</span>
+<span class="fc" id="L39">    }</span>
+
+    // effects: return all prerequisties
+    // modifies: prerequisites
+    public ArrayList&lt;String&gt; getPrerequisites() {
+<span class="fc" id="L44">        return prerequisites;</span>
+    }
+
+    // effects: get each events' event code in order to store prerequistie
+    public String getEventCode() {
+<span class="fc" id="L49">        return eventCode;</span>
+    }
+
+    // effects: get min age
+    public int getMinAge() {
+<span class="fc" id="L54">        return minAge;</span>
+    }
+
+    // efects: get max age
+    public int getMaxAge() {
+<span class="fc" id="L59">        return maxAge;</span>
+    }
+
+    public int getSanChange() {
+<span class="fc" id="L63">        return sanChange;</span>
+    }
+
+    public int getMoodChange() {
+<span class="nc" id="L67">        return moodChange;</span>
+    }
+
+    // requires: age&gt;=0
+    // effects: identify whether can happen at that age
+    public boolean canHappenAtAge(int age) {
+<span class="fc bfc" id="L73" title="All 4 branches covered.">        return age &gt;= minAge &amp;&amp; age &lt;= maxAge;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

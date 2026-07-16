@@ -2,105 +2,121 @@ package model;
 
 // import javax.swing.*;
 // import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+
+/**
+ * Player.
+ */
 
 public class Player {
-    String playerName;
-    String locationInEarth;
-    int playerAge;
-    int playerWisdom;
-    int playerSan;
-    int playerMood;
-    EventLibrary eventlibrary;
-    ArrayList<String> achievementMade;
+  String playerName;
+  String locationInEarth;
+  int playerAge;
+  int playerWisdom;
+  int playerSan;
+  int playerMood;
+  EventLibrary eventlibrary;
+  ArrayList<String> achievementMade;
 
-    // effects: structure player basic information, attributes
-    // modifies: this
-    public Player(String name, String location, int age) {
-        this.playerName = name;
-        this.locationInEarth = location;
-        eventlibrary = new EventLibrary();
-        playerAge = age;
-        playerWisdom = 60;
-        playerSan = 30;
-        playerMood = 30;
-    }
+  /**
+   * effects: structure player basic information, attributes.
+   * modifies: this
+   */
 
-    public void addPlayerSan(int san) {
-        playerSan += san;
-    }
+  public Player(String name, String location, int age) {
+    this.playerName = name;
+    this.locationInEarth = location;
+    eventlibrary = new EventLibrary();
+    playerAge = age;
+    playerWisdom = 60;
+    playerSan = 30;
+    playerMood = 30;
+  }
 
-    public void reducePlayerSan(int san) {
-        playerSan -= san;
-    }
+  public void addPlayerSan(int san) {
+    playerSan += san;
+  }
 
-    public void addPlayerMood(int mood) {
-        playerMood += mood;
-    }
+  public void reducePlayerSan(int san) {
+    playerSan -= san;
+  }
 
-    public void reducePlayerMood(int mood) {
-        playerMood -= mood;
-    }
+  public void addPlayerMood(int mood) {
+    playerMood += mood;
+  }
 
-    public void addAge() {
-        playerAge++;
-    }
+  public void reducePlayerMood(int mood) {
+    playerMood -= mood;
+  }
 
-    public int getPlayerMood() {
-        return playerMood;
-    }
+  public void addAge() {
+    playerAge++;
+  }
 
-    public int getPlayerSan() {
-        return playerSan;
-    }
+  public void addWisdom() {
+    playerWisdom += 3;
+  }
 
-    public int getPlayerAge() {
-        return playerAge;
-    }
+  public int getPlayerMood() {
+    return playerMood;
+  }
 
-    public String getPlayerlocation() {
-        return locationInEarth;
-    }
+  public int getPlayerSan() {
+    return playerSan;
+  }
 
-    public void addWisdom() {
-        playerWisdom += 3;
-    }
+  public int getPlayerAge() {
+    return playerAge;
+  }
 
-    public void setWisdom(int wisdom) {
-        playerWisdom = wisdom;
-    }
+  public int getPlayerWisdom() {
+    return playerWisdom;
+  }
 
-    public int getWisdom() {
-        return playerWisdom;
-    }
+  public String getPlayerlocation() {
+    return locationInEarth;
+  }
 
-    // modifies: this
-    // effects: change the value of San and Mood based on enrolled events
-    public void getConditionChanged(Event event) {
-        playerSan += event.getSanChange();
-        playerMood += event.getMoodChange();
-    }
-    // effects: to show player image(should done at phase 2)
-    // public static Image test1;
-    // static {
-    // test1 = new ImageIcon("src/main/assest/test1.jpeg").getImage();
-    // }
+  public void setWisdom(int wisdom) {
+    playerWisdom = wisdom;
+  }
 
-    // effects: for some selected events will have achievements, this is to recored
-    // and add
-    // the events player achieved, can check in 'check status'
-    // modifies: ArrayList<String> achievementMade
-    public void addAchieveMent(String achievement) {
-        achievementMade.add(achievement);
-    }
+  public int getWisdom() {
+    return playerWisdom;
+  }
 
-    // efffects: recorded achievements
-    public ArrayList<String> achievementMade() {
-        return achievementMade;
-    }
+  // modifies: this
+  // effects: change the value of San and Mood based on enrolled events
+  public void getConditionChanged(Event event) {
+    playerSan += event.getSanChange();
+    playerMood += event.getMoodChange();
+  }
+  // effects: to show player image(should done at phase 2)
+  // public static Image test1;
+  // static {
+  // test1 = new ImageIcon("src/main/assest/test1.jpeg").getImage();
+  // }
 
-    public String toString() {
-        return "Today you are " + getPlayerAge() + " years old  You're in " + getPlayerlocation() + " right now"
-                + "\n Your mood value is: " + getPlayerMood() + " Your san value is:" + getPlayerSan();
-    }
+  // effects: for some selected events will have achievements, this is to recored
+  // and add
+  // the events player achieved, can check in 'check status'
+  // modifies: ArrayList<String> achievementMade
+  public void addAchieveMent(String achievement) {
+    achievementMade.add(achievement);
+  }
+
+  // efffects: recorded achievements
+  public ArrayList<String> achievementMade() {
+    return achievementMade;
+  }
+
+  /**
+   * toString method.
+   * effects: telling the basic attributes current player is.
+   */
+  public String toString() {
+    return "Today you are " + getPlayerAge() + " years old  You're in "
+        + getPlayerlocation() + " right now" + "\n Your mood value is: "
+        + getPlayerMood() + " Your san value is:" + getPlayerSan();
+  }
 }

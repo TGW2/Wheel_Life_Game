@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/ui/GameApp.java">
+<error line="27" column="5" severity="error" message="方法 runGame 57 行（最多： 25 行）。" source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/ui/Main.java">
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/ui/GamePanel.java">
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/model/EventLibrary.java">
+<error line="20" column="5" severity="error" message="方法 initializeAllEvents 46 行（最多： 25 行）。" source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="53" column="15" severity="error" message="Local variable name &apos;Engaged&apos; does not adhere to coding style." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="61" column="15" severity="error" message="Local variable name &apos;Divorced&apos; does not adhere to coding style." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="169" column="9" severity="error" message="&apos;if&apos; 结构必须使用大括号 &apos;{}&apos;。" source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/model/Event.java">
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/main/model/Player.java">
+</file>
+<file name="/Users/gwsmac/Desktop/project-g6h9c/src/test/model/TestEventLibrary.java">
+<error line="13" column="5" severity="error" message="每一个变量的定义必须在它的声明处，且在同一行。" source="com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck"/>
+<error line="15" column="5" severity="error" message="每一个变量的定义必须在它的声明处，且在同一行。" source="com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck"/>
+<error line="17" column="5" severity="error" message="每一个变量的定义必须在它的声明处，且在同一行。" source="com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck"/>
+<error line="31" column="10" severity="error" message="Method name &apos;TestDescription_Age&apos; does not follow coding style." source="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck"/>
+<error line="38" column="10" severity="error" message="Method name &apos;TestSan_MoodChange&apos; does not follow coding style." source="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck"/>
+<error line="45" column="10" severity="error" message="Method name &apos;TestEvents_AgeScale&apos; does not follow coding style." source="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck"/>
+</file>
+</checkstyle>

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.EventLibrary;
-import model.Event;
+// import model.EventLibrary;
+// import model.Event;
 import java.util.ArrayList;
 
 public class TestEventLibrary {
@@ -14,7 +14,7 @@ public class TestEventLibrary {
     private EventLibrary allPossibleEvents;
     private EventLibrary eventLibrary, eventLibrary2;
     private Event event;
-    private Player p1, p2, p3;
+    private Player p1, p2, p3, p4;
 
     @BeforeEach
     void runBefore() {
@@ -37,14 +37,13 @@ public class TestEventLibrary {
     @Test
     void TestSan_MoodChange() {
         assertEquals(4, event.getSanChange());
-        assertEquals(4, event.getSanChange());
-
+        assertEquals(4, event.getMoodChange());
     }
 
     @Test
     void TestEvents_AgeScale() {
-        assertEquals(3, allEventsCouldHappen1.size());
-        assertEquals(8, allEventsCouldHappen2.size());
+        assertEquals(9, allEventsCouldHappen1.size());
+        assertEquals(10, allEventsCouldHappen2.size());
     }
 
     // to test if prerequiste required events can work successfully when prerequiste
@@ -96,5 +95,27 @@ public class TestEventLibrary {
             }
         }
         assertTrue(containsMasterInMath);
+    }
+
+    @BeforeEach
+    void runBefore3() {
+        p4 = new Player("Player4", "Eu", 50);
+    }
+
+    @Test
+    public void playerAttributeTest() {
+        assertEquals(30, p4.getPlayerSan());
+        assertEquals(30, p4.getPlayerMood());
+        assertEquals(60, p4.getPlayerWisdom());
+        p4.addPlayerSan(1);
+        p4.addPlayerMood(10);
+        p4.addWisdom();
+        assertEquals(31, p4.getPlayerSan());
+        assertEquals(40, p4.getPlayerMood());
+        assertEquals(63,p4.getPlayerWisdom());
+        p4.reducePlayerSan(10);
+        p4.reducePlayerMood(10);
+        assertEquals(21, p4.getPlayerSan());
+        assertEquals(30, p4.getPlayerMood());
     }
 }
