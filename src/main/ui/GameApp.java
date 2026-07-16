@@ -30,7 +30,6 @@ public class GameApp {
         boolean playing = true;
         while (playing) {
             System.out.println("\n" + p1.toString());
-            // System.out.println(p1.getPlayerAge() + " years old\n");
 
             System.out.println("Here's the options you might get:");
             ArrayList<Event> possibleEvents = eventLibrary.allPossibleEvents(p1.getPlayerAge());
@@ -42,55 +41,65 @@ public class GameApp {
                     System.out.println("  - " + e.getEventDescription());
                 }
             }
-
-            Event event = eventLibrary.spingWheelForAge(p1.getPlayerAge());
-            eventLibrary.addGoneThroughEvents(event);
-
-            if (event != null) {
-                System.out.println("\nAnd you get: " + event.getEventDescription());
-                p1.getConditionChanged(event);
-                System.out.println("San: " + p1.getPlayerSan() + ", Mood: " + p1.getPlayerMood());
-            }
-
+            roundStateDeclaration();
             eventLibrary.prerequistieEventAlternation();
 
-            boolean recycle = true;
-            while (recycle) {
-                System.out.println("\nHere's the menu option");
-                System.out.println("1. Next year");
-                System.out.println("2. View Player Status");
-                System.out.println("3. View all events");
-                System.out.println("4. Exit");
-                System.out.print("Choose: ");
-
-                String choice = sc.nextLine();
-
-                switch (choice) {
-                    case "1":
-                        p1.addAge();
-                        recycle = false;
-                        break;
-                    case "2":
-                        System.out.println(p1.toString());
-                        System.out.println("Achievement: " + p1.achievementMade());
-                        break;
-                    case "3":
-                        for (Event events : eventLibrary.allPossibleEvents(p1.getPlayerAge())) {
-                            System.out.print(events.getEventDescription() + ", ");
-                        }
-                        break;
-                    case "4":
-                        System.out.println("Thank you for playing!");
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Invalid input");
-                }
-            }
             eventLibrary.roundCheck(p1);
+            menuCycle();
         }
-
         sc.close();
     }
 
+    public void menuCycle() {
+        boolean choosing = true;
+        while (choosing) {
+            askingMenu();
+            choosing = receivingSystem();
+        }
+    }
+
+    public void askingMenu() {
+        System.out.println("\nHere's the menu option");
+        System.out.println("1. Next year");
+        System.out.println("2. View Player Status");
+        System.out.println("3. View all events");
+        System.out.println("4. Exit");
+        System.out.print("Choose: ");
+    }
+
+    public boolean receivingSystem() {
+        String choice = sc.nextLine();
+        switch (choice) {
+            case "1":
+                p1.addAge();
+                return false;
+            case "2":
+                System.out.println(p1.toString());
+                System.out.println("Achievement: " + p1.achievementMade());
+                return true;
+            case "3":
+                for (String eventCode : eventLibrary.goneThroughEvents()) {
+                    System.out.println(eventCode);
+                }
+                return true;
+            case "4":
+                System.out.println("Thank you for playing!");
+                System.exit(0);
+                return false;
+            default:
+                System.out.println("Invalid input");
+                return true;
+        }
+    }
+
+    public void roundStateDeclaration() {
+        Event event = eventLibrary.spingWheelForAge(p1.getPlayerAge());
+        eventLibrary.addGoneThroughEvents(event);
+
+        if (event != null) {
+            System.out.println("\nAnd you get: " + event.getEventDescription());
+            p1.getConditionChanged(event);
+            System.out.println("San: " + p1.getPlayerSan() + ", Mood: " + p1.getPlayerMood());
+        }
+    }
 }

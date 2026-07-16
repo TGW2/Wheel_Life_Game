@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 // import model.Event;
 import java.util.ArrayList;
 
-public class TestEventLibrary {
+public class EventLibraryTest {
     private ArrayList<Event> allEventsCouldHappen1, allEventsCouldHappen2;
     private EventLibrary allPossibleEvents;
     private EventLibrary eventLibrary, eventLibrary2;
