@@ -28,6 +28,11 @@ public class TestEventLibrary {
     }
 
     @Test
+    void TestEvents() {
+        assertEquals(30, eventLibrary.allEvents());
+    }
+
+    @Test
     void TestDescription_Age() {
         assertEquals("sleeping", event.getEventDescription());
         assertEquals(0, event.getMinAge());
@@ -112,7 +117,7 @@ public class TestEventLibrary {
         p4.addWisdom();
         assertEquals(31, p4.getPlayerSan());
         assertEquals(40, p4.getPlayerMood());
-        assertEquals(63,p4.getPlayerWisdom());
+        assertEquals(63, p4.getPlayerWisdom());
         p4.reducePlayerSan(10);
         p4.reducePlayerMood(10);
         assertEquals(21, p4.getPlayerSan());
