@@ -10,7 +10,6 @@ The game follows the character from birth to the end of life. At the conclusion,
 
 Designed for players who enjoy simulation, emergent storytelling, and games in which earlier outcomes ripple into later ones.
 
-
 ---
 
 # User Stories
@@ -23,3 +22,9 @@ Designed for players who enjoy simulation, emergent storytelling, and games in w
 * As a player, I want to add completed life events to my character's life history.
 * As a player, I want to view all major events that have occurred during my character's life.
 * As a player, I want to save the current state of my character's life.
+
+Phase 2:
+
+As a player, I want to save my game progress to file (including all attributes and events experienced) so that I can resume my life simulation at a later time.
+
+As a player, when I start the application, I want to load my previous game state from file so that I can continue where I left off.
