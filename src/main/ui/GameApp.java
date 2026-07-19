@@ -7,11 +7,52 @@ import java.util.*;
 
 public class GameApp {
     private EventLibrary eventLibrary;
-    // private Event event;
+	// private Event event;
     Player p1;
     Scanner sc;
 
-    public GameApp() {
+    public GameApp() { 
+        sc = new Scanner(System.in);
+    }
+
+     public void welcomingPlayer() {
+        System.out.println("Welcome to Life Rolling game!\n" + "Please choose the following option");
+        System.out.println(
+                "1.Start new game"
+                        + "\n2.Loading game"
+                        + "\n3.Quit");
+    }
+
+    public void start() {  
+        welcomingPlayer();
+        boolean cycle = true;
+        while (cycle) {
+            System.out.print("\nChoosing: ");
+            String beginningOption = sc.nextLine();
+            switch (beginningOption) {
+                case "1":
+                    playerInitilization();
+                    runGame();
+                    cycle = false;
+                    break;
+                case "2":
+                    // loadGame();  
+                    runGame();
+                    cycle = false;
+                    break;
+                case "3":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again");
+                    break;
+            }
+        }
+    }
+    
+   
+   
+    public void playerInitilization() {
         sc = new Scanner(System.in);
         eventLibrary = new EventLibrary();
 
@@ -59,11 +100,13 @@ public class GameApp {
     }
 
     public void askingMenu() {
-        System.out.println("\nHere's the menu option");
-        System.out.println("1. Next year");
-        System.out.println("2. View Player Status");
-        System.out.println("3. View all events");
-        System.out.println("4. Exit");
+        System.out.println(
+                "\nHere's the menu option"
+                + "\n1. Next year"
+                + "\n2. View Player Status"
+                + "\n3. View all events"
+                + "\n4. Exit"
+        );
         System.out.print("Choose: ");
     }
 
@@ -83,12 +126,36 @@ public class GameApp {
                 }
                 return true;
             case "4":
-                System.out.println("Thank you for playing!");
-                System.exit(0);
+                savingGameMethodOption();
                 return false;
             default:
                 System.out.println("Invalid input");
                 return true;
+        }
+    }
+
+    public void savingGameMethodOption() {
+        System.out.println(
+                "\nA. Back to game"
+                + "\nB. Save game"
+                + "\nC. Exit");
+        boolean cycle = true;
+        while (cycle) {
+            String option = sc.nextLine();
+            switch (option) {
+                case "A":
+                    runGame();
+                    cycle = false;
+                    break;
+                case "B":
+                    // saveGame();
+                    cycle = false;
+                case "C":
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid input, please try again");
+                    break;
+            }
         }
     }
 
