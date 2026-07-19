@@ -27,6 +27,7 @@ public class JsonWriter {
         try (PrintWriter printWriter = new PrintWriter(filename)) {
             printWriter.print(json.toString(4));
         }
+        System.out.println("Successed!");
     }
 
     /**
@@ -59,13 +60,14 @@ public class JsonWriter {
      * @return a JSONArray containing all completed events
      */
     private JSONArray eventsToJson(EventLibrary eventLibrary) {
-        JSONObject json = new JSONObject();
+        
         JSONArray jsonArray = new JSONArray();
         
         goneThroughEvents = eventLibrary.goneThroughEventsInEvent();
 
         for (Event eachEvent : goneThroughEvents) {
-            json.put("evenrDescription",eachEvent.getEventDescription());
+            JSONObject json = new JSONObject();
+            json.put("eventDescription",eachEvent.getEventDescription());
             json.put("minAge", eachEvent.getMinAge());
             json.put("maxAge", eachEvent.getMaxAge());
             json.put("sanChange", eachEvent.getSanChange());
@@ -77,8 +79,9 @@ public class JsonWriter {
                 jsonArrayPrerequistie.put(prerequisites);
             }
             json.put("Prerequistie",jsonArrayPrerequistie);
+            jsonArray.put(json);
         }
-        return jsonArray.put(json);
+        return jsonArray;
     }
 
 }

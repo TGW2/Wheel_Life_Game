@@ -61,7 +61,7 @@ public class PlayerTest {
 
     @Test
     void testConditionChangedPositive() {
-        Event event = new Event("Good event", 0, 100, 5, 7, "good");
+        Event event = new Event("Good event", 0, 100, 5, 7, 0, "good");
         player.getConditionChanged(event);
         assertEquals(35, player.getPlayerSan());
         assertEquals(37, player.getPlayerMood());
@@ -69,7 +69,7 @@ public class PlayerTest {
 
     @Test
     void testConditionChangedNegative() {
-        Event event = new Event("Bad event", 0, 100, -8, -10, "bad");
+        Event event = new Event("Bad event", 0, 100, -8, -10, 0, "bad");
         player.getConditionChanged(event);
         assertEquals(22, player.getPlayerSan());
         assertEquals(20, player.getPlayerMood());

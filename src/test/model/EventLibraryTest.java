@@ -20,7 +20,7 @@ public class EventLibraryTest {
     void runBefore() {
         allPossibleEvents = new EventLibrary();
         eventLibrary = new EventLibrary();
-        event = new Event("sleeping", 0, 6, 4, 4, null);
+        event = new Event("sleeping", 0, 6, 4, 4,0, null);
         p1 = new Player("Player1", "Eu", 18);
         p2 = new Player("Player1", "Eu", 22);
         allEventsCouldHappen1 = allPossibleEvents.allPossibleEvents(p1.getPlayerAge());
@@ -55,8 +55,8 @@ public class EventLibraryTest {
     // is reached
     @Test
     public void testRelationshipUnlocksBrokeUpAndEngaged() {
-        Event InAlovership = new Event("In a lovership",22,100,10,10,"In a lovership");
-        eventLibrary.addGoneThroughEvents(InAlovership);
+        Event InAlovership = new Event("In a lovership",22,100,10,10,0,"In a lovership");
+        eventLibrary.addGoneThroughEventsInString(InAlovership);
         ArrayList<Event> possibleEvents = eventLibrary.allPossibleEvents(23);
         boolean containsBrokeUp = false;
         boolean containsEngaged = false;
@@ -82,10 +82,10 @@ public class EventLibraryTest {
     // testing achievement program
     @Test
     public void achievementStatus() {
-        Event intoMath = new Event("intoMath", 6, 100, 1, 1, "intoMath");
-        Event loveInMath = new Event("loveInMath", 6, 100, 2, 2, "loveInMath");
-        eventLibrary2.addGoneThroughEvents(intoMath);
-        eventLibrary2.addGoneThroughEvents(loveInMath);
+        Event intoMath = new Event("intoMath", 6, 100, 1, 1, 0,"intoMath");
+        Event loveInMath = new Event("loveInMath", 6, 100, 2, 2, 0,"loveInMath");
+        eventLibrary2.addGoneThroughEventsInString(intoMath);
+        eventLibrary2.addGoneThroughEventsInString(loveInMath);
         ArrayList<Event> possibleEvents = eventLibrary2.allPossibleEvents(p3.getPlayerAge());
         boolean containsMasterInMath = false;
         for (Event event : possibleEvents) {
@@ -120,57 +120,57 @@ public class EventLibraryTest {
 
     @Test
     void testPrerequisiteEventAlternationBrokeUp() {
-        Event inAlovership = new Event("In a lovership", 0, 100, 0, 0, "In a lovership");
-        Event engaged = new Event("Engaged", 0, 100, 0, 0, "Engaged");
-        Event married = new Event("Married", 0, 100, 0, 0, "Get married");
-        Event brokeUp = new Event("Broke up", 0, 100, 0, 0, "Broke up");
+        Event inAlovership = new Event("In a lovership", 0, 100, 0, 0,0, "In a lovership");
+        Event engaged = new Event("Engaged", 0, 100, 0, 0, 0,"Engaged");
+        Event married = new Event("Married", 0, 100, 0, 0, 0,"Get married");
+        Event brokeUp = new Event("Broke up", 0, 100, 0, 0, 0,"Broke up");
 
-        eventLibrary.addGoneThroughEvents(inAlovership);
-        eventLibrary.addGoneThroughEvents(engaged);
-        eventLibrary.addGoneThroughEvents(married);
-        eventLibrary.addGoneThroughEvents(brokeUp);
+        eventLibrary.addGoneThroughEventInEvent(inAlovership);
+        eventLibrary.addGoneThroughEventInEvent(engaged);
+        eventLibrary.addGoneThroughEventInEvent(married);
+        eventLibrary.addGoneThroughEventInEvent(brokeUp);
 
         eventLibrary.prerequistieEventAlternation();
 
-        assertFalse(eventLibrary.goneThroughEvents().contains("In a lovership"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Engaged"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Get married"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Broke up"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("In a lovership"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Engaged"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Get married"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Broke up"));
     }
 
     @Test
     void testPrerequisiteEventAlternationDivorced() {
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "In a lovership"));
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Engaged"));
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Get married"));
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "Divorced"));
+        eventLibrary.addGoneThroughEventInEvent(new Event("", 0, 100, 0, 0, 0, "In a lovership"));
+        eventLibrary.addGoneThroughEventInEvent(new Event("", 0, 100, 0, 0, 0, "Engaged"));
+        eventLibrary.addGoneThroughEventInEvent(new Event("", 0, 100, 0, 0, 0, "Get married"));
+        eventLibrary.addGoneThroughEventInEvent(new Event("", 0, 100, 0, 0, 0, "Divorced"));
 
         eventLibrary.prerequistieEventAlternation();
 
-        assertFalse(eventLibrary.goneThroughEvents().contains("In a lovership"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Engaged"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Get married"));
-        assertFalse(eventLibrary.goneThroughEvents().contains("Divorced"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("In a lovership"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Engaged"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Get married"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("Divorced"));
     }
 
     @Test
     void testPrerequisiteEventAlternationLoveInMath() {
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "intoMath"));
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "loveInMath"));
+        eventLibrary.addGoneThroughEventsInString(new Event("", 0, 100, 0, 0, 0, "intoMath"));
+        eventLibrary.addGoneThroughEventsInString(new Event("", 0, 100, 0, 0, 0, "loveInMath"));
 
         eventLibrary.prerequistieEventAlternation();
 
-        assertFalse(eventLibrary.goneThroughEvents().contains("intoMath"));
-        assertTrue(eventLibrary.goneThroughEvents().contains("loveInMath"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("intoMath"));
+        assertTrue(eventLibrary.goneThroughEventsInString().contains("loveInMath"));
     }
 
     @Test
     void testPrerequisiteEventAlternationMasterInMath() {
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "loveInMath"));
-        eventLibrary.addGoneThroughEvents(new Event("", 0, 100, 0, 0, "masterInMath"));
+        eventLibrary.addGoneThroughEventsInString(new Event("", 0, 100, 0, 0, 0, "loveInMath"));
+        eventLibrary.addGoneThroughEventsInString(new Event("", 0, 100, 0, 0, 0, "masterInMath"));
         eventLibrary.prerequistieEventAlternation();
-        assertFalse(eventLibrary.goneThroughEvents().contains("loveInMath"));
-        assertTrue(eventLibrary.goneThroughEvents().contains("masterInMath"));
+        assertFalse(eventLibrary.goneThroughEventsInString().contains("loveInMath"));
+        assertTrue(eventLibrary.goneThroughEventsInString().contains("masterInMath"));
     }
 
     @Test
@@ -178,14 +178,14 @@ public class EventLibraryTest {
         Event result = eventLibrary.spingWheelForAge(10);
         assertNotNull(result);
         assertTrue(result.canHappenAtAge(10));
-        assertTrue(eventLibrary.goneThroughEvents().contains(result.getEventCode()));
+        assertTrue(eventLibrary.goneThroughEventsInString().contains(result.getEventCode()));
     }
 
     @Test
     void testSpinWheelForAgeReturnsNull() {
         Event result = eventLibrary.spingWheelForAge(101);
         assertNull(result);
-        assertTrue(eventLibrary.goneThroughEvents().isEmpty());
+        assertTrue(eventLibrary.goneThroughEventsInString().isEmpty());
     }
 
     @Test

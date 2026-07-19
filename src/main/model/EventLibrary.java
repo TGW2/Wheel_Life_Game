@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class EventLibrary {
     private ArrayList<Event> allEvents;
+    private ArrayList<Event> goneThroughEventsInEvent = new ArrayList<>();
     private ArrayList<String> goneThroughEvents = new ArrayList<>();
     private Player p1;
 
@@ -33,80 +34,80 @@ public class EventLibrary {
     public void initializeChildhoodEvents() {
         // particular time events
         // at childhood
-        allEvents.add(new Event("Hopscotch", 0, 7, 2, 2, "Hopscotch"));
-        allEvents.add(new Event("A childhood friend", 0, 7, 2, 2, "A childhood friend"));
-        allEvents.add(new Event("Bedwetting", 0, 7, -2, -2, "A childhood friend"));
-        allEvents.add(new Event("Looking to be an adult", 0, 7, 1, 1, "A childhood friend"));
-        allEvents.add(new Event("Lying to parents", 0, 7, -3, -3, "A childhood friend"));
+        allEvents.add(new Event("Hopscotch", 0, 7, 2, 2, 0, "Hopscotch"));
+        allEvents.add(new Event("A childhood friend", 0, 7, 2, 2, 0, "A childhood friend"));
+        allEvents.add(new Event("Bedwetting", 0, 7, -2, -2, 0, "A childhood friend"));
+        allEvents.add(new Event("Looking to be an adult", 0, 7, 1, 1, 0, "A childhood friend"));
+        allEvents.add(new Event("Lying to parents", 0, 7, -3, -3, 0, "A childhood friend"));
 
     }
 
     public void initializeElementaryEvents() {
         // elementary school
-        allEvents.add(new Event("Taking class", 7, 12, -2, -2, "Taking class"));
-        allEvents.add(new Event("Playing with friends", 7, 12, 4, 3, "Playing with friends"));
-        allEvents.add(new Event("Forgot doing HW", 7, 12, 0, -4, "Forgot doing HW"));
-        allEvents.add(new Event("Playing sports", 7, 12, 2, 4, "Playing sports"));
-        allEvents.add(new Event("Learning new friends", 7, 12, 3, 2, "Learning new friends"));
+        allEvents.add(new Event("Taking class", 7, 12, -2, -2, 0, "Taking class"));
+        allEvents.add(new Event("Playing with friends", 7, 12, 4, 3, 0, "Playing with friends"));
+        allEvents.add(new Event("Forgot doing HW", 7, 12, 0, -4, 0, "Forgot doing HW"));
+        allEvents.add(new Event("Playing sports", 7, 12, 2, 4, 0, "Playing sports"));
+        allEvents.add(new Event("Learning new friends", 7, 12, 3, 2, 0, "Learning new friends"));
 
     }
 
     public void initializeMiddleSchoolEvents() {
         // middle school
-        allEvents.add(new Event("Violate school rules", 13, 15, 0, -3, "Violate school rules"));
-        allEvents.add(new Event("Have a partner", 13, 15, 6, 9, "Have a partner"));
-        allEvents.add(new Event("Bad final exam", 13, 15, -5, -7, "Bad final exam"));
-        allEvents.add(new Event("disappointed to life", 13, 15, -100, -100, "disappointed to life"));
+        allEvents.add(new Event("Violate school rules", 13, 15, 0, -3, 0, "Violate school rules"));
+        allEvents.add(new Event("Have a partner", 13, 15, 6, 9, 0, "Have a partner"));
+        allEvents.add(new Event("Bad final exam", 13, 15, -5, -7, 0, "Bad final exam"));
+        allEvents.add(new Event("disappointed to life", 13, 15, -100, -100, 0, "disappointed to life"));
 
     }
 
     public void initializeHighSchoolAndUniEvents() {
         // high school & Uni
-        allEvents.add(new Event("Join a club you like", 16, 22, 2, 2, "Join a club you like"));
-        allEvents.add(new Event("Skipping class", 16, 22, 1, 4, "Skipping class"));
-        allEvents.add(new Event("Get a part time job", 16, 22, 5, 3, "Get a part time job"));
+        allEvents.add(new Event("Join a club you like", 16, 22, 2, 2, 0, "Join a club you like"));
+        allEvents.add(new Event("Skipping class", 16, 22, 1, 4, 0, "Skipping class"));
+        allEvents.add(new Event("Get a part time job", 16, 22, 5, 3, 0, "Get a part time job"));
 
     }
 
     public void initializeLongLifeEvents() {
         // long life events
-        Event inAlovership = new Event("In a lovership", 22, 100, 10, 10, "In a lovership");
+        Event inAlovership = new Event("In a lovership", 22, 100, 10, 10, 0, "In a lovership");
         allEvents.add(inAlovership);
 
-        Event brokeUp = new Event("Broke up", 22, 100, -5, -5, "Broke up");
+        Event brokeUp = new Event("Broke up", 22, 100, -5, -5, 0, "Broke up");
         brokeUp.addPrerequisite("In a lovership");
         allEvents.add(brokeUp);
 
-        Event engaged = new Event("Engaged", 22, 100, 2, 2, "Engaged");
+        Event engaged = new Event("Engaged", 22, 100, 2, 2, 0, "Engaged");
         engaged.addPrerequisite("In a lovership");
         allEvents.add(engaged);
 
-        Event getMarried = new Event("Get married -- Congurates!", 22, 100, 15, 15, "Get married");
+        Event getMarried = new Event("Get married -- Congurates!", 22, 100, 15, 15, 0, "Get married");
         getMarried.addPrerequisite("Engaged");
         allEvents.add(getMarried);
 
-        Event divorced = new Event("Divorced -- Sry to hear that", 22, 100, -8, -8, "Divorced");
+        Event divorced = new Event("Divorced -- Sry to hear that", 22, 100, -8, -8, 0, "Divorced");
         divorced.addPrerequisite("Get married");
         allEvents.add(divorced);
 
-        allEvents.add(new Event("Eating", 0, 100, 2, 4, "Eating"));
-        allEvents.add(new Event("Sleeping", 0, 100, 4, 4, "Sleeping"));
-        allEvents.add(new Event("Crying", 0, 100, -1, -5, "Crying"));
-        allEvents.add(new Event("Hugging", 0, 100, 5, 10, "Hugging"));
-        allEvents.add(new Event("Laughing", 0, 100, 1, 1, "Laughing"));
+        allEvents.add(new Event("Eating", 0, 100, 2, 4, 0, "Eating"));
+        allEvents.add(new Event("Sleeping", 0, 100, 4, 4, 0, "Sleeping"));
+        allEvents.add(new Event("Crying", 0, 100, -1, -5, 0, "Crying"));
+        allEvents.add(new Event("Hugging", 0, 100, 5, 10, 0, "Hugging"));
+        allEvents.add(new Event("Laughing", 0, 100, 1, 1, 0, "Laughing"));
 
     }
 
     public void initializeMathEvents() {
         // math longlife specialization
-        Event intoMath = new Event("intoMath", 6, 100, 1, 1, "intoMath");
+        Event intoMath = new Event("intoMath", 6, 100, 1, 1, 0, "intoMath");
         allEvents.add(intoMath);
 
-        Event loveInMath = new Event("loveInMath", 6, 100, 2, 2, "loveInMath");
+        Event loveInMath = new Event("loveInMath", 6, 100, 2, 2, 0, "loveInMath");
         loveInMath.addPrerequisite("intoMath");
         allEvents.add(loveInMath);
 
-        Event masterInMath = new Event("masterInMath", 6, 100, 8, 8, "masterInMath");
+        Event masterInMath = new Event("masterInMath", 6, 100, 8, 8, 0, "masterInMath");
         masterInMath.addPrerequisite("loveInMath");
         allEvents.add(masterInMath);
     }
@@ -135,7 +136,7 @@ public class EventLibrary {
     public boolean checkPrerequistieEligible(Event event) {
         ArrayList<String> preRequisties = event.getPrerequisites();
         for (String eventCode : preRequisties) {
-            if (!goneThroughEvents().contains(eventCode)) {
+            if (!goneThroughEventsInString().contains(eventCode)) {
                 return false;
             }
             if (eventCode.equals("masterInMath") && p1.getWisdom() <= 85) {
@@ -172,9 +173,12 @@ public class EventLibrary {
     }
 
     // effects: get all selected events
-    public ArrayList<String> goneThroughEvents() {
+    public ArrayList<String> goneThroughEventsInString() {
         return goneThroughEvents;
+    }
 
+    public ArrayList<Event> goneThroughEventsInEvent() {
+        return goneThroughEventsInEvent;
     }
 
     /**
@@ -184,11 +188,32 @@ public class EventLibrary {
      * or not in this list(can be deleted).
      */
 
-    public ArrayList<String> addGoneThroughEvents(Event event) {
+    public ArrayList<String> addGoneThroughEventsInString(Event event) {
         if (!goneThroughEvents.contains(event.getEventCode())) {
             goneThroughEvents.add(event.getEventCode());
         }
         return goneThroughEvents;
+    }
+
+    public ArrayList<Event> addGoneThroughEventInEvent(Event event) {
+        if (!goneThroughEvents.contains(event.getEventCode())) {
+            goneThroughEventsInEvent.add(event);
+        }
+        return goneThroughEventsInEvent;
+    }
+
+    /**
+     * Sync eventInString and eventInEvents
+     * @param event this.
+     */
+    public void addGoneThroughEvent(Event event) {
+        if (event == null) {
+            return;
+        }
+        if (!goneThroughEvents.contains(event.getEventCode())) {
+            goneThroughEvents.add(event.getEventCode());
+            goneThroughEventsInEvent.add(event);
+        }
     }
 
     /**
@@ -205,7 +230,7 @@ public class EventLibrary {
         }
         Random random = new Random();
         int randomIndex = random.nextInt(wheelEvents.size());
-        addGoneThroughEvents(wheelEvents.get(randomIndex));
+        addGoneThroughEvent(wheelEvents.get(randomIndex));
         return wheelEvents.get(randomIndex);
     }
 

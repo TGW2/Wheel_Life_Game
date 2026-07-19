@@ -62,6 +62,14 @@ public class Player {
         return playerMood;
     }
 
+    public String getPlayerName(){
+        return playerName;
+    }
+
+    public String getLocation(){
+        return locationInEarth;
+    }
+
     public int getPlayerSan() {
         return playerSan;
     }
@@ -84,6 +92,14 @@ public class Player {
 
     public int getWisdom() {
         return playerWisdom;
+    }
+
+    public void setPlayerSan(int san){
+        playerSan = san;
+    }
+
+    public void setPlayerMood(int mood){
+        playerMood = mood;
     }
 
     // modifies: this

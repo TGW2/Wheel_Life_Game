@@ -91,7 +91,7 @@ public class JsonReader {
      * @return event constructed from the JSON data
      */
     private Event loadEvent(JSONObject eventJson) {
-        String eventDescription = eventJson.getString("evenrDescription");
+        String eventDescription = eventJson.getString("eventDescription");
         int minAge = eventJson.getInt("minAge");
         int maxAge = eventJson.getInt("maxAge");
         int sanChange = eventJson.getInt("sanChange");

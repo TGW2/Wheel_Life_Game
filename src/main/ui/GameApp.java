@@ -1,21 +1,27 @@
 package ui;
 
 import model.Player;
+import persistence.JsonWriter;
+import persistence.JsonReader;
 import model.Event;
 import model.EventLibrary;
+
+import java.io.IOException;
 import java.util.*;
 
 public class GameApp {
-    private EventLibrary eventLibrary;
-	// private Event event;
+    String filePath = "src/main/data/dataStorage.json";
+    EventLibrary eventLibrary = new EventLibrary();
     Player p1;
     Scanner sc;
+    JsonReader jsonReader = new JsonReader(filePath);
+    JsonWriter jsonWriter = new JsonWriter();
 
-    public GameApp() { 
+    public GameApp() {
         sc = new Scanner(System.in);
     }
 
-     public void welcomingPlayer() {
+    public void welcomingPlayer() {
         System.out.println("Welcome to Life Rolling game!\n" + "Please choose the following option");
         System.out.println(
                 "1.Start new game"
@@ -23,7 +29,7 @@ public class GameApp {
                         + "\n3.Quit");
     }
 
-    public void start() {  
+    public void start() throws IOException {
         welcomingPlayer();
         boolean cycle = true;
         while (cycle) {
@@ -36,22 +42,19 @@ public class GameApp {
                     cycle = false;
                     break;
                 case "2":
-                    // loadGame();  
+                    p1 = jsonReader.loadGame(filePath, eventLibrary);
                     runGame();
                     cycle = false;
                     break;
                 case "3":
                     System.exit(0);
-                    break;
                 default:
                     System.out.println("Invalid input, please try again");
                     break;
             }
         }
     }
-    
-   
-   
+
     public void playerInitilization() {
         sc = new Scanner(System.in);
         eventLibrary = new EventLibrary();
@@ -65,8 +68,8 @@ public class GameApp {
         p1 = new Player(name, location, 0);
     }
 
-    public void runGame() {
-        System.out.println("Are you ready to rolling your life?");
+    public void runGame() throws IOException {
+        System.out.println("\nAre you ready to rolling your life?");
 
         boolean playing = true;
         while (playing) {
@@ -91,7 +94,7 @@ public class GameApp {
         sc.close();
     }
 
-    public void menuCycle() {
+    public void menuCycle() throws IOException {
         boolean choosing = true;
         while (choosing) {
             askingMenu();
@@ -102,15 +105,14 @@ public class GameApp {
     public void askingMenu() {
         System.out.println(
                 "\nHere's the menu option"
-                + "\n1. Next year"
-                + "\n2. View Player Status"
-                + "\n3. View all events"
-                + "\n4. Exit"
-        );
+                        + "\n1. Next year"
+                        + "\n2. View Player Status"
+                        + "\n3. View all events"
+                        + "\n4. Exit");
         System.out.print("Choose: ");
     }
 
-    public boolean receivingSystem() {
+    public boolean receivingSystem() throws IOException {
         String choice = sc.nextLine();
         switch (choice) {
             case "1":
@@ -121,7 +123,7 @@ public class GameApp {
                 System.out.println("Achievement: " + p1.achievementMade());
                 return true;
             case "3":
-                for (String eventCode : eventLibrary.goneThroughEvents()) {
+                for (String eventCode : eventLibrary.goneThroughEventsInString()) {
                     System.out.println(eventCode);
                 }
                 return true;
@@ -134,11 +136,11 @@ public class GameApp {
         }
     }
 
-    public void savingGameMethodOption() {
+    public void savingGameMethodOption() throws IOException {
         System.out.println(
                 "\nA. Back to game"
-                + "\nB. Save game"
-                + "\nC. Exit");
+                        + "\nB. Save game"
+                        + "\nC. Exit");
         boolean cycle = true;
         while (cycle) {
             String option = sc.nextLine();
@@ -148,7 +150,7 @@ public class GameApp {
                     cycle = false;
                     break;
                 case "B":
-                    // saveGame();
+                    jsonWriter.saveGame(p1, eventLibrary, filePath);
                     cycle = false;
                 case "C":
                     System.exit(0);
@@ -159,9 +161,10 @@ public class GameApp {
         }
     }
 
+    
     public void roundStateDeclaration() {
         Event event = eventLibrary.spingWheelForAge(p1.getPlayerAge());
-        eventLibrary.addGoneThroughEvents(event);
+        eventLibrary.addGoneThroughEventInEvent(event);
 
         if (event != null) {
             System.out.println("\nAnd you get: " + event.getEventDescription());
