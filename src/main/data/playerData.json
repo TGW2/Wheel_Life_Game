@@ -1,0 +1,12 @@
+{
+    "Player": {
+        "San": 30,
+        "Wisdom": 60,
+        "Mood": 30,
+        "Birthplace": "BC",
+        "AchievementMade": [],
+        "Age": 50,
+        "Name": "Player"
+    },
+    "Gone Through Events": []
+}

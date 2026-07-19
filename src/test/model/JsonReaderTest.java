@@ -13,13 +13,13 @@ public class JsonReaderTest {
 
     @Test
     public void testLoadGameNoEvents() {
-        JsonReader reader = new JsonReader("src/main/data/playerData.json");
+        JsonReader reader = new JsonReader("src/main/data/dataStorage.json.json");
         eventLibrary = new EventLibrary();
         try {
-            Player player = reader.loadGame("src/main/data/playerData.json",eventLibrary);
-            assertEquals("Player", player.getPlayerName());
-            assertEquals("BC", player.getLocation());
-            assertEquals(50, player.getPlayerAge());
+            Player player = reader.loadGame("src/main/data/dataStorage.json",eventLibrary);
+            assertEquals("a", player.getPlayerName());
+            assertEquals("aa", player.getLocation());
+            assertEquals(14, player.getPlayerAge());
         } catch (IOException e) {
             fail("IOException should not have been thrown");
         }
@@ -27,12 +27,12 @@ public class JsonReaderTest {
 
     @Test
     public void testLoadGameWithEvents() {
-        JsonReader reader = new JsonReader("src/main/data/playerData.json");
+        JsonReader reader = new JsonReader("src/main/data/dataStorage.json.json");
         eventLibrary = new EventLibrary();
         try {
-            Player player = reader.loadGame("src/main/data/playerData.json",eventLibrary);
-            assertEquals("Player", player.getPlayerName());
-            assertEquals("BC", player.getLocation());
+            Player player = reader.loadGame("src/main/data/dataStorage.json",eventLibrary);
+            assertEquals("a", player.getPlayerName());
+            assertEquals("aa", player.getLocation());
         } catch (IOException e) {
             fail("IOException should not have been thrown");
         }
