@@ -1,5 +1,7 @@
 package ui;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 // import javax.swing.*;
 // import java.util.*;
 
@@ -7,6 +9,7 @@ package ui;
 /**
  * Main.
  */
+// @ExcludeFromJacocoGeneratedReport
 public class Main {
     /**
      * Main running program, initialize player sttributes and events given to

@@ -24,7 +24,7 @@ public class Event {
      */
 
     public Event(String eventDescription, int minAge, int maxAge,
-            int sanChange, int moodChange,int wisdomChange, String eventCode) {
+            int sanChange, int moodChange, int wisdomChange, String eventCode) {
         this.eventDescription = eventDescription;
         this.minAge = minAge;
         this.maxAge = maxAge;
@@ -76,9 +76,10 @@ public class Event {
         return moodChange;
     }
 
-    public int getWisdomChange(){
+    public int getWisdomChange() {
         return wisdomChange;
     }
+
     // requires: age>=0
     // effects: identify whether can happen at that age
     public boolean canHappenAtAge(int age) {

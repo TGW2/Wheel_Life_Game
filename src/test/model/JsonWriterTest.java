@@ -12,6 +12,7 @@ import persistence.JsonWriter;
 
 public class JsonWriterTest {
     EventLibrary eventLibrary;
+
     @Test
     public void testSaveGame() {
         JsonWriter writer = new JsonWriter();
@@ -19,7 +20,9 @@ public class JsonWriterTest {
         Player player = new Player("Player", "BC", 50);
         EventLibrary library = new EventLibrary();
 
-        assertDoesNotThrow(() -> {writer.saveGame(player, library,"src/main/data/playerData.json");});
+        assertDoesNotThrow(() -> {
+            writer.saveGame(player, library, "src/main/data/playerData.json");
+        });
     }
 
     @Test
@@ -29,7 +32,9 @@ public class JsonWriterTest {
         Player player = new Player("Player", "BC", 50);
         EventLibrary library = new EventLibrary();
 
-        assertThrows(IOException.class, () -> {writer.saveGame(player, library,"a/b/c.json");});
+        assertThrows(IOException.class, () -> {
+            writer.saveGame(player, library, "a/b/c.json");
+        });
     }
 
     @Test
@@ -40,9 +45,10 @@ public class JsonWriterTest {
         writer.saveGame(player, eventLibrary, "src/main/data/playerData.json");
 
         JsonReader reader = new JsonReader("src/main/data/playerData.json");
-        Player loaded = reader.loadGame("src/main/data/playerData.json",eventLibrary);
+        Player loaded = reader.loadGame("src/main/data/playerData.json", eventLibrary);
 
-        assertEquals(player.getPlayerName(),loaded.getPlayerName());
-        assertEquals(player.getPlayerAge(),loaded.getPlayerAge());
+        assertEquals(player.getPlayerName(), loaded.getPlayerName());
+        assertEquals(player.getPlayerAge(), loaded.getPlayerAge());
     }
+
 }

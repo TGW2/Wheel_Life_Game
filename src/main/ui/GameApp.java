@@ -9,6 +9,7 @@ import model.EventLibrary;
 import java.io.IOException;
 import java.util.*;
 
+// @ExcludeFromJacocoGeneratedReport
 public class GameApp {
     String filePath = "src/main/data/dataStorage.json";
     EventLibrary eventLibrary = new EventLibrary();
