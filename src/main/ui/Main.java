@@ -18,5 +18,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
         GameApp g = new GameApp();
         g.start();
+        // GamePanel gp = new GamePanel("Rolling life");
     }
 }

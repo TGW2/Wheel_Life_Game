@@ -30,8 +30,6 @@ As a player, when I start the application, I want to load my previous game state
 
 ---
 
-
-
 # Instructions for End User
 
 - You can view the panel that displays all experienced events by clicking the "View Experienced Events" button.
@@ -40,3 +38,25 @@ As a player, when I start the application, I want to load my previous game state
 - You can locate the visual component in the main application window, where the player's avatar is displayed and updated after selecting a new costume using the "Costume" button.
 - You can save the state of the application by clicking the "Save" button.
 - You can reload the state of the application by clicking the "Load" button.
+
+eventOutputArea = new JTextArea();
+
+    eventOutputArea.setEditable(false);
+
+    eventOutputArea.setLineWrap(true);
+
+    eventOutputArea.setWrapStyleWord(true);
+
+    JScrollPane scrollPane = new JScrollPane(eventOutputArea);
+
+    scrollPane.setPreferredSize(new Dimension(300, 250));
+
+    scrollPane.setMaximumSize(new Dimension(300, 250));
+
+    scrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    rightPanel.add(Box.createVerticalStrut(20));
+
+    rightPanel.add(scrollPane);
+
+    rightPanel.add(Box.createVerticalStrut(20));
