@@ -62,11 +62,11 @@ public class Player {
         return playerMood;
     }
 
-    public String getPlayerName(){
+    public String getPlayerName() {
         return playerName;
     }
 
-    public String getLocation(){
+    public String getLocation() {
         return locationInEarth;
     }
 
@@ -94,11 +94,11 @@ public class Player {
         return playerWisdom;
     }
 
-    public void setPlayerSan(int san){
+    public void setPlayerSan(int san) {
         playerSan = san;
     }
 
-    public void setPlayerMood(int mood){
+    public void setPlayerMood(int mood) {
         playerMood = mood;
     }
 
@@ -132,8 +132,8 @@ public class Player {
      * effects: telling the basic attributes current player is.
      */
     public String toString() {
-        return "Today you are " + getPlayerAge() + " years old  You're in "
-                + getPlayerlocation() + " right now" + "\n Your mood value is: "
-                + getPlayerMood() + " Your san value is:" + getPlayerSan();
+        return "Today you are " + getPlayerAge() + " years old\nYou're in "
+                + getPlayerlocation() + " right now" + "\nYour mood value is: "
+                + getPlayerMood() + "\nYour san value is:" + getPlayerSan();
     }
 }

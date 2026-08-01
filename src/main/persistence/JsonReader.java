@@ -79,7 +79,7 @@ public class JsonReader {
         for (int i = 0; i < events.length(); i++) {
             JSONObject eventJson = events.getJSONObject(i);
             Event event = loadEvent(eventJson);
-            eventLibrary.addGoneThroughEventInEvent(event);
+            eventLibrary.addGoneThroughEvent(event);
         }
     }
 

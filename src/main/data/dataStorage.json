@@ -1,73 +1,12 @@
 {
     "Player": {
-        "San": 54,
-        "Wisdom": 66,
-        "Mood": 62,
-        "Birthplace": "aa",
+        "San": 30,
+        "Wisdom": 60,
+        "Mood": 30,
+        "Birthplace": "BC",
         "AchievementMade": [],
-        "Age": 14,
-        "Name": "a"
+        "Age": 10,
+        "Name": "player"
     },
-    "Gone Through Events": [
-        {
-            "eventCode": "A childhood friend",
-            "wisdomChange": 0,
-            "maxAge": 7,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Lying to parents",
-            "sanChange": -3,
-            "moodChange": -3
-        },
-        {
-            "eventCode": "Hopscotch",
-            "wisdomChange": 0,
-            "maxAge": 7,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Hopscotch",
-            "sanChange": 2,
-            "moodChange": 2
-        },
-        {
-            "eventCode": "intoMath",
-            "wisdomChange": 0,
-            "maxAge": 100,
-            "Prerequistie": [],
-            "minAge": 6,
-            "eventDescription": "intoMath",
-            "sanChange": 1,
-            "moodChange": 1
-        },
-        {
-            "eventCode": "Laughing",
-            "wisdomChange": 0,
-            "maxAge": 100,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Laughing",
-            "sanChange": 1,
-            "moodChange": 1
-        },
-        {
-            "eventCode": "Hugging",
-            "wisdomChange": 0,
-            "maxAge": 100,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Hugging",
-            "sanChange": 5,
-            "moodChange": 10
-        },
-        {
-            "eventCode": "Sleeping",
-            "wisdomChange": 0,
-            "maxAge": 100,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Sleeping",
-            "sanChange": 4,
-            "moodChange": 4
-        }
-    ]
+    "Gone Through Events": []
 }

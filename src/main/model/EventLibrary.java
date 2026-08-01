@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -36,9 +37,9 @@ public class EventLibrary {
         // at childhood
         allEvents.add(new Event("Hopscotch", 0, 7, 2, 2, 0, "Hopscotch"));
         allEvents.add(new Event("A childhood friend", 0, 7, 2, 2, 0, "A childhood friend"));
-        allEvents.add(new Event("Bedwetting", 0, 7, -2, -2, 0, "A childhood friend"));
-        allEvents.add(new Event("Looking to be an adult", 0, 7, 1, 1, 0, "A childhood friend"));
-        allEvents.add(new Event("Lying to parents", 0, 7, -3, -3, 0, "A childhood friend"));
+        allEvents.add(new Event("Bedwetting", 0, 7, -2, -2, 0, "Bedwetting"));
+        allEvents.add(new Event("Looking to be an adult", 0, 7, 1, 1, 0, "Looking to be an adult"));
+        allEvents.add(new Event("Lying to parents", 0, 7, -3, -3, 0, "Lying to parents"));
 
     }
 
@@ -152,24 +153,50 @@ public class EventLibrary {
      */
     public void prerequistieEventAlternation() {
         if (goneThroughEvents.contains("Broke up")) {
-            goneThroughEvents.remove("In a lovership");
-            goneThroughEvents.remove("Engaged");
-            goneThroughEvents.remove("Get married");
-            goneThroughEvents.remove("Broke up");
+            removedAllEventsByCode("Broke up");
         }
         if (goneThroughEvents.contains("Divorced")) {
-            goneThroughEvents.remove("In a lovership");
-            goneThroughEvents.remove("Engaged");
-            goneThroughEvents.remove("Get married");
-            goneThroughEvents.remove("Divorced");
+            removedAllEventsByCode("Divorced");
         }
         if (goneThroughEvents.contains("loveInMath")) {
-            goneThroughEvents.remove("intoMath");
+            removedAllEventsByCode("loveInMath");
         }
         if (goneThroughEvents.contains("masterInMath")) {
-            goneThroughEvents.remove("loveInMath");
+            removedAllEventsByCode("masterInMath");
         }
 
+    }
+
+    // effects: remove an event and all of its removed prerequisites from both
+    // the string list and the event list so they stay consistent.
+    private void removedAllEventsByCode(String code) {
+        switch (code) {
+            case "Broke up":
+                removeBoth("In a lovership");
+                removeBoth("Engaged");
+                removeBoth("Get married");
+                removeBoth("Broke up");
+                break;
+            case "Divorced":
+                removeBoth("In a lovership");
+                removeBoth("Engaged");
+                removeBoth("Get married");
+                removeBoth("Divorced");
+                break;
+            case "loveInMath":
+                removeBoth("intoMath");
+                break;
+            case "masterInMath":
+                removeBoth("loveInMath");
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void removeBoth(String code) {
+        goneThroughEvents.remove(code);
+        goneThroughEventsInEvent.removeIf(e -> e.getEventCode().equals(code));
     }
 
     // effects: get all selected events
@@ -189,17 +216,32 @@ public class EventLibrary {
      */
 
     public ArrayList<String> addGoneThroughEventsInString(Event event) {
-        if (!goneThroughEvents.contains(event.getEventCode())) {
-            goneThroughEvents.add(event.getEventCode());
+        String code = event.getEventCode();
+        if (!goneThroughEvents.contains(code)
+                && !containsEventCode(goneThroughEventsInEvent, code)) {
+            goneThroughEvents.add(code);
+            goneThroughEventsInEvent.add(event);
         }
         return goneThroughEvents;
     }
 
     public ArrayList<Event> addGoneThroughEventInEvent(Event event) {
-        if (!goneThroughEvents.contains(event.getEventCode())) {
+        String code = event.getEventCode();
+        if (!goneThroughEvents.contains(code)
+                && !containsEventCode(goneThroughEventsInEvent, code)) {
             goneThroughEventsInEvent.add(event);
+            goneThroughEvents.add(code);
         }
         return goneThroughEventsInEvent;
+    }
+
+    private boolean containsEventCode(List<Event> events, String code) {
+        for (Event e : events) {
+            if (e.getEventCode().equals(code)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
