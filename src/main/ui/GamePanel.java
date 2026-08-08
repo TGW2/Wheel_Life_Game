@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import model.GameLife;
 import model.Player;
+import model.EventLog;
 
 public class GamePanel extends JPanel {
     private int currentImage = 1;
@@ -190,13 +191,30 @@ public class GamePanel extends JPanel {
     private void initializeFrame(String name) {
         frame = new JFrame(name);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                printLog();
+                System.exit(0);
+            }
+        });
+
         frame.setSize(800, 628);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
         frame.setContentPane(this);
         frame.setVisible(true);
+    }
+
+    private void printLog() {
+        model.EventLog el = model.EventLog.getInstance();
+        for (model.Event4 e : el) {
+            System.out.println(e);
+        }
     }
 
     public void appendEventOutput(String output) {

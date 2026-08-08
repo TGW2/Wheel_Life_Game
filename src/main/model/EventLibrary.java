@@ -256,6 +256,7 @@ public class EventLibrary {
         if (!goneThroughEvents.contains(event.getEventCode())) {
             goneThroughEvents.add(event.getEventCode());
             goneThroughEventsInEvent.add(event);
+            EventLog.getInstance().logEvent(new Event4("Event added: " + event.getEventDescription()));
         }
     }
 
