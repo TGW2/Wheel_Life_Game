@@ -43,26 +43,26 @@ As a player, when I start the application, I want to load my previous game state
 
 # Phase 4: Task 2
 
-Sat Aug 08 15:22:25 PDT 2026
-Event added: Looking to be an adult
-Sat Aug 08 15:22:25 PDT 2026
-Event added: Eating
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Laughing
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Sleeping
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Lying to parents
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Learning new friends
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Crying
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Playing sports
-Sat Aug 08 15:22:28 PDT 2026
-Event added: Hugging
-Sat Aug 08 15:22:28 PDT 2026  
-Event added: intoMath  
+* Sat Aug 08 15:22:25 PDT 2026
+  Event added: Looking to be an adult
+  Sat Aug 08 15:22:25 PDT 2026
+  Event added: Eating
+  Sat Aug 08 15:22:26 PDT 2026
+  Event added: Laughing
+  Sat Aug 08 15:22:26 PDT 2026
+  Event added: Sleeping
+  Sat Aug 08 15:22:26 PDT 2026
+  Event added: Lying to parents
+  Sat Aug 08 15:22:27 PDT 2026
+  Event added: Learning new friends
+  Sat Aug 08 15:22:27 PDT 2026
+  Event added: Crying
+  Sat Aug 08 15:22:27 PDT 2026
+  Event added: Playing sports
+  Sat Aug 08 15:22:28 PDT 2026
+  Event added: Hugging
+  Sat Aug 08 15:22:28 PDT 2026  
+  Event added: intoMath
 
 ---
 
