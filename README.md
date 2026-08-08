@@ -38,3 +38,28 @@ As a player, when I start the application, I want to load my previous game state
 - You can locate the visual component in the main application window, where the player's avatar is displayed and updated after selecting a new costume using the "Costume" button.
 - You can save the state of the application by clicking the "Save" button.
 - You can reload the state of the application by clicking the "Load" button.
+
+---
+
+# Phase 4: Task 2
+
+Sat Aug 08 15:22:25 PDT 2026
+Event added: Looking to be an adult
+Sat Aug 08 15:22:25 PDT 2026
+Event added: Eating
+Sat Aug 08 15:22:26 PDT 2026
+Event added: Laughing
+Sat Aug 08 15:22:26 PDT 2026
+Event added: Sleeping
+Sat Aug 08 15:22:26 PDT 2026
+Event added: Lying to parents
+Sat Aug 08 15:22:27 PDT 2026
+Event added: Learning new friends
+Sat Aug 08 15:22:27 PDT 2026
+Event added: Crying
+Sat Aug 08 15:22:27 PDT 2026
+Event added: Playing sports
+Sat Aug 08 15:22:28 PDT 2026
+Event added: Hugging
+Sat Aug 08 15:22:28 PDT 2026
+Event added: intoMath
