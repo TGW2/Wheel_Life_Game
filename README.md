@@ -63,3 +63,11 @@ Sat Aug 08 15:22:28 PDT 2026
 Event added: Hugging
 Sat Aug 08 15:22:28 PDT 2026
 Event added: intoMath
+
+---
+
+# Phase 4: Task 3
+
+1. Refactor EventLibrary and GameLife class, because GameLife is only for GUI implementing, majority major methods still use from EventLibrary, but its too hard to accomplish using methods in EventLibrary from GamePanel because the return type are different than string what GamePanel expected
+2. Decreasing coupling methods in EventLibrary, for example addGoneThroughEvents this method havee three similar methods but with different return types, it can be change into a more generic way
+3. Make the logic in GameApp more readble and maintainable, because currently GameApp breaked a long method into different peices everywhere which is hard to understand its logic by reading, it needs to rewrite into a more directly, from top to button's way for maintaince
