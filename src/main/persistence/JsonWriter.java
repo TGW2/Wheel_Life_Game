@@ -74,6 +74,7 @@ public class JsonWriter {
             json.put("moodChange", eachEvent.getMoodChange());
             json.put("wisdomChange", eachEvent.getWisdomChange());
             json.put("eventCode", eachEvent.getEventCode());
+            json.put("category", eachEvent.getCategory());
             JSONArray jsonArrayPrerequistie = new JSONArray();
             for (String prerequisites : eachEvent.getPrerequisites()) {
                 jsonArrayPrerequistie.put(prerequisites);

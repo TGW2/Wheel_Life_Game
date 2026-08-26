@@ -35,19 +35,19 @@ public class Player {
     }
 
     public void addPlayerSan(int san) {
-        playerSan += san;
+        playerSan = clamp(playerSan + san);
     }
 
     public void reducePlayerSan(int san) {
-        playerSan -= san;
+        playerSan = clamp(playerSan - san);
     }
 
     public void addPlayerMood(int mood) {
-        playerMood += mood;
+        playerMood = clamp(playerMood + mood);
     }
 
     public void reducePlayerMood(int mood) {
-        playerMood -= mood;
+        playerMood = clamp(playerMood - mood);
     }
 
     public void addAge() {
@@ -87,7 +87,7 @@ public class Player {
     }
 
     public void setWisdom(int wisdom) {
-        playerWisdom = wisdom;
+        playerWisdom = clamp(wisdom);
     }
 
     public int getWisdom() {
@@ -95,18 +95,19 @@ public class Player {
     }
 
     public void setPlayerSan(int san) {
-        playerSan = san;
+        playerSan = clamp(san);
     }
 
     public void setPlayerMood(int mood) {
-        playerMood = mood;
+        playerMood = clamp(mood);
     }
 
     // modifies: this
     // effects: change the value of San and Mood based on enrolled events
     public void getConditionChanged(Event event) {
-        playerSan += event.getSanChange();
-        playerMood += event.getMoodChange();
+        playerSan = clamp(playerSan + event.getSanChange());
+        playerMood = clamp(playerMood + event.getMoodChange());
+        playerWisdom = clamp(playerWisdom + event.getWisdomChange());
     }
     // effects: to show player image(should done at phase 2)
     // public static Image test1;
@@ -119,7 +120,9 @@ public class Player {
     // the events player achieved, can check in 'check status'
     // modifies: ArrayList<String> achievementMade
     public void addAchieveMent(String achievement) {
-        achievementMade.add(achievement);
+        if (achievement != null && !achievementMade.contains(achievement)) {
+            achievementMade.add(achievement);
+        }
     }
 
     // efffects: recorded achievements
@@ -135,5 +138,9 @@ public class Player {
         return "Today you are " + getPlayerAge() + " years old\nYou're in "
                 + getPlayerlocation() + " right now" + "\nYour mood value is: "
                 + getPlayerMood() + "\nYour san value is:" + getPlayerSan();
+    }
+
+    private int clamp(int value) {
+        return Math.max(0, Math.min(100, value));
     }
 }

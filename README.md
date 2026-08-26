@@ -1,73 +1,54 @@
 # Life Wheel
 
-A 2D desktop life-simulation game driven by a spinning-wheel mechanic.
+> Every year leaves a constellation.
 
-Each spin of the wheel ages the character by one year and triggers a life event — education, health, relationships, career, accidents, and more.
+Life Wheel is a compact narrative life simulator for desktop. A turn of the wheel advances one year and draws a memory from childhood, education, friendship, work, love, rest, failure, and discovery. Earlier memories unlock later possibilities, while Spirit, Joy, and Insight shape the life that emerges.
 
-One event shapes the next. A good education may open doors later; a serious illness may close them. The player's accumulated history and attributes determine what possibilities lie ahead.
+This repository now contains a complete playable vertical slice rather than the original CPSC 210 prototype.
 
-The game follows the character from birth to the end of life. At the conclusion, the player may review a full summary of the character's journey.
+## The game
 
-Designed for players who enjoy simulation, emergent storytelling, and games in which earlier outcomes ripple into later ones.
+- Play a full run from birth to age 90 in short, one-year turns.
+- Follow six named life chapters and 30 authored, prerequisite-aware events.
+- Balance Spirit, Joy, and Insight; reaching zero can end a journey early.
+- Unlock persistent in-run achievements and one of several epilogues.
+- Review a reverse-chronological life journal with every defining memory.
+- Save and continue from the main menu. Saves live at `~/.lifewheel/journey.json`.
+- Use the animated wheel or press Space for keyboard play.
 
----
+## Run it
 
-# User Stories
+Java 11 or newer and Maven 3.8+ are required.
 
-* As a player, I want to spin a wheel to generate a random life event.
-* As a player, I want my character's age to increase by one year after each spin.
-* As a player, I want to view my character's current age, country, health, wealth, education, and other life attributes.
-* As a player, I want previous life events to affect the possible outcomes of future spins.
-* As a player, I want to add completed life events to my character's life history.
-* As a player, I want to view all major events that have occurred during my character's life.
-* As a player, I want to save the current state of my character's life.
+```bash
+mvn clean package
+java -jar target/project-g6h9c-1.0.0.jar
+```
 
-Phase 2:
+The packaged JAR is self-contained and includes the original character artwork created for this game.
 
-As a player, I want to save my game progress to file (including all attributes and events experienced) so that I can resume my life simulation at a later time.
+## Test it
 
-As a player, when I start the application, I want to load my previous game state from file so that I can continue where I left off.
+```bash
+mvn test
+```
 
----
+The suite currently contains 43 model and persistence tests.
 
-# Instructions for End User
+## Architecture
 
-- You can view the panel that displays all experienced events by clicking the "View Experienced Events" button.
-- You can generate the first required action related to adding and managing experienced events by clicking the "Spin Wheel" button to generate a new life event.
-- You can generate the second required action related to adding and managing experienced events by clicking the "View Current Status" button to view how the experienced events have affected the player's current attributes.
-- You can locate the visual component in the main application window, where the player's avatar is displayed and updated after selecting a new costume using the "Costume" button.
-- You can save the state of the application by clicking the "Save" button.
-- You can reload the state of the application by clicking the "Load" button.
+- `model.GameLife` owns the run lifecycle, chapters, scoring, achievements, and endings.
+- `model.EventLibrary` owns event eligibility, prerequisite chains, and non-repeating draws.
+- `model.Player` owns bounded attributes and their event-driven changes.
+- `persistence` provides backwards-compatible JSON saves.
+- `ui.GamePanel` provides the custom-rendered Swing presentation, main menu, wheel animation, HUD, journal, and epilogue.
+- `src/main/resources/images/wanderer.png` is an original generated production asset bundled on the classpath.
 
----
+## Release status
 
-# Phase 4: Task 2
+The project is a polished, complete desktop game vertical slice and builds as a distributable JAR. A commercial Steam release still requires platform packaging/signing, a Steamworks app ID and SDK integration, store capsule art/screenshots, localization, accessibility QA, audio/music licensing, controller validation, and platform-specific testing. Those are publishing operations rather than missing core gameplay.
 
-Sat Aug 08 15:22:25 PDT 2026
-Event added: Looking to be an adult
-Sat Aug 08 15:22:25 PDT 2026
-Event added: Eating
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Laughing
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Sleeping
-Sat Aug 08 15:22:26 PDT 2026
-Event added: Lying to parents
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Learning new friends
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Crying
-Sat Aug 08 15:22:27 PDT 2026
-Event added: Playing sports
-Sat Aug 08 15:22:28 PDT 2026
-Event added: Hugging
-Sat Aug 08 15:22:28 PDT 2026  
-Event added: intoMath  
+## Credits
 
----
-
-# Phase 4: Task 3
-
-1. Refactor EventLibrary and GameLife class, because GameLife is only for GUI implementing, majority major methods still use from EventLibrary, but its too hard to accomplish using methods in EventLibrary from GamePanel because the return type are different than string what GamePanel expected
-2. Decreasing coupling methods in EventLibrary, for example addGoneThroughEvents this method havee three similar methods but with different return types, it can be change into a more generic way
-3. Make the logic in GameApp more readble and maintainable, because currently GameApp breaked a long method into different peices everywhere which is hard to understand its logic by reading, it needs to rewrite into a more directly, from top to button's way for maintaince
+Design and original prototype: project-g6h9c contributors.
+Production redesign, original event writing, UI implementation, and generated character direction: 2026.

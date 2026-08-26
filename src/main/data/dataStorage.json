@@ -1,43 +1,12 @@
 {
     "Player": {
-        "San": 32,
+        "San": 30,
         "Wisdom": 60,
-        "Mood": 32,
-        "Birthplace": "BC",
+        "Mood": 30,
+        "Birthplace": "aa",
         "AchievementMade": [],
-        "Age": 3,
-        "Name": "player1"
+        "Age": 14,
+        "Name": "a"
     },
-    "Gone Through Events": [
-        {
-            "eventCode": "Bedwetting",
-            "wisdomChange": 0,
-            "maxAge": 7,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Bedwetting",
-            "sanChange": -2,
-            "moodChange": -2
-        },
-        {
-            "eventCode": "Hopscotch",
-            "wisdomChange": 0,
-            "maxAge": 7,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "Hopscotch",
-            "sanChange": 2,
-            "moodChange": 2
-        },
-        {
-            "eventCode": "A childhood friend",
-            "wisdomChange": 0,
-            "maxAge": 7,
-            "Prerequistie": [],
-            "minAge": 0,
-            "eventDescription": "A childhood friend",
-            "sanChange": 2,
-            "moodChange": 2
-        }
-    ]
+    "Gone Through Events": []
 }

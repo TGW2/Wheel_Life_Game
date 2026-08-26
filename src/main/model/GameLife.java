@@ -2,172 +2,135 @@ package model;
 
 import persistence.JsonReader;
 import persistence.JsonWriter;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * gamelife is used for gamepanel to call method and return string content as
- * it easire for eventoutput
- */
+/** Coordinates one complete run of Life Wheel. */
 public class GameLife {
-    private static final String DEFAULT_FILE_PATH = "src/main/data/dataStorage.json";
-
+    private static final String DEFAULT_FILE_PATH = "src/main/data/playerData.json";
+    public static final int FINAL_AGE = 90;
     private Player player;
     private EventLibrary eventLibrary;
     private final JsonWriter jsonWriter;
-    private JsonReader jsonReader;
     private String filePath;
-    private int lastEventAge;
+    private Event lastEvent;
 
-    /**
-     * Creates a new game with a fresh player and event library.
-     */
     public GameLife() {
-        this("player1", "BC", 0);
+        this("Wanderer", "Somewhere beneath the same sky", 0);
     }
 
-    /**
-     * Creates a new game, allowing an explicit starting age. Useful if a
-     * setup screen ever wants to customise the start age.
-     *
-     * @param name       the player's name
-     * @param birthplace the player's birthplace
-     * @param age        the player's starting age
-     */
     public GameLife(String name, String birthplace, int age) {
-        this.player = new Player(name, birthplace, age);
-        this.eventLibrary = new EventLibrary();
-        this.filePath = DEFAULT_FILE_PATH;
-        this.jsonWriter = new JsonWriter();
-        this.jsonReader = new JsonReader(filePath);
-        this.lastEventAge = age;
+        player = new Player(name, birthplace, age);
+        eventLibrary = new EventLibrary();
+        eventLibrary.setPlayer(player);
+        filePath = DEFAULT_FILE_PATH;
+        jsonWriter = new JsonWriter();
+        updateAchievements();
     }
 
-    /**
-     * Spins the wheel once: picks a random event possible at the player's
-     * current age, applies its attribute changes, records it, and ages the
-     * player by one year.
-     *
-     * @return a human-readable message describing what happened
-     */
     public String spinOnce() {
+        if (isGameOver()) {
+            return getEndingText();
+        }
         int age = player.getPlayerAge();
-
-        Event event = eventLibrary.spingWheelForAge(age);
-
-        if (event == null) {
-            lastEventAge = age;
-            player.addAge();
-            return "No events are available at age " + age + ". You grow one year older.";
+        lastEvent = eventLibrary.spingWheelForAge(age);
+        if (lastEvent != null) {
+            player.getConditionChanged(lastEvent);
         }
-
-        lastEventAge = age;
-        player.getConditionChanged(event);
         player.addAge();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nToday you are : ").append(age).append(" years old")
-                .append("\nYou get : " + event.getEventDescription()).append("\n");
-        sb.append("Your mood value is: ").append(player.getPlayerMood())
-                .append("\nYour san value is:").append(player.getPlayerSan());
-        return sb.toString();
+        if (player.getPlayerAge() % 10 == 0) {
+            player.addWisdom();
+        }
+        updateAchievements();
+        if (lastEvent == null) {
+            return "Age " + age + " — A quiet year passes. Even stillness leaves a mark.";
+        }
+        return "Age " + age + " — " + lastEvent.getEventDescription()
+                + "\n" + lastEvent.getImpactSummary();
     }
 
-    /**
-     * @return the current player
-     */
-    public Player getPlayer() {
-        return player;
+    public Player getPlayer() { return player; }
+    public Event getLastEvent() { return lastEvent; }
+    public EventLibrary getEventLibrary() { return eventLibrary; }
+
+    public boolean isGameOver() {
+        return player.getPlayerAge() >= FINAL_AGE || player.getPlayerMood() <= 0 || player.getPlayerSan() <= 0;
     }
 
-    /**
-     * 
-     * @return description about player current status
-     */
+    public double getLifeProgress() {
+        return Math.min(1.0, player.getPlayerAge() / (double) FINAL_AGE);
+    }
+
+    public String getLifeChapter() {
+        int age = player.getPlayerAge();
+        if (age < 7) { return "FIRST LIGHT"; }
+        if (age < 13) { return "WIDER WORLDS"; }
+        if (age < 23) { return "BECOMING"; }
+        if (age < 45) { return "MAKING A MARK"; }
+        if (age < 68) { return "DEEP ROOTS"; }
+        return "GOLDEN HOUR";
+    }
+
+    public int getLegacyScore() {
+        return player.getWisdom() * 4 + player.getPlayerMood() * 3 + player.getPlayerSan() * 3
+                + eventLibrary.goneThroughEventsInEvent().size() * 12;
+    }
+
+    public String getEndingTitle() {
+        if (player.getPlayerSan() <= 0) { return "A Flame Spent Brightly"; }
+        if (player.getPlayerMood() <= 0) { return "The Long Winter"; }
+        if (getLegacyScore() >= 900) { return "A Life in Full Colour"; }
+        if (player.getWisdom() >= 80) { return "The Quiet Sage"; }
+        return "One Story Among the Stars";
+    }
+
+    public String getEndingText() {
+        return getEndingTitle() + "\n\nAt age " + player.getPlayerAge() + ", " + player.getPlayerName()
+                + " leaves behind " + eventLibrary.goneThroughEventsInEvent().size()
+                + " defining memories and a legacy score of " + getLegacyScore()
+                + ". No life is perfect. Every life is singular.";
+    }
+
     public String getCurrentPlayerStatusForGui() {
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nToday you are : ").append(lastEventAge).append(" years old")
-                .append("\nYou're in : " + getPlayer().getLocation()).append("\n");
-        sb.append("Your mood value is: ").append(getPlayer().getPlayerMood())
-                .append("\nYour san value is:").append(getPlayer().getPlayerSan());
-        sb.append("\nAchievement: ").append(getPlayer().achievementMade().toString());
-
-        return sb.toString();
+        return player.getPlayerName() + " · " + player.getPlayerAge() + " years old · " + getLifeChapter()
+                + "\nFrom " + player.getLocation() + "\nSpirit " + player.getPlayerSan()
+                + " · Joy " + player.getPlayerMood() + " · Insight " + player.getWisdom()
+                + "\nLegacy " + getLegacyScore() + " · Achievements " + player.achievementMade().size();
     }
 
-    /**
-     * @return the current event library
-     */
-    public EventLibrary getEventLibrary() {
-        return eventLibrary;
-    }
-
-    /**
-     * Builds a multi-line text report of every event experienced so far.
-     *
-     * @return the experienced events as text, or a placeholder if none yet
-     */
     public String getExperiencedEventsText() {
-        List<Event> goneThrough = eventLibrary.goneThroughEventsInEvent();
-
-        if (goneThrough.isEmpty()) {
-            return "You have not experienced any events yet.";
+        List<Event> events = eventLibrary.goneThroughEventsInEvent();
+        if (events.isEmpty()) { return "You have not experienced any events yet."; }
+        StringBuilder text = new StringBuilder();
+        for (int i = events.size() - 1; i >= 0; i--) {
+            Event event = events.get(i);
+            text.append("• ").append(event.getEventDescription()).append("\n  ")
+                    .append(event.getCategory()).append(" · ").append(event.getImpactSummary()).append("\n\n");
         }
-
-        StringBuilder sb = new StringBuilder();
-        for (Event event : goneThrough) {
-            sb.append("\n- ").append(event.getEventDescription()).append("");
-        }
-        return sb.toString().trim();
+        return text.toString().trim();
     }
 
-    /**
-     * Saves the current player and experienced events to the default file.
-     *
-     * @throws IOException if the file cannot be written
-     */
-    public void saveGame() throws IOException {
-        saveGame(filePath);
-    }
+    public void saveGame() throws IOException { saveGame(filePath); }
+    public void saveGame(String path) throws IOException { jsonWriter.saveGame(player, eventLibrary, path); }
+    public void loadGame() throws IOException { loadGame(filePath); }
 
-    /**
-     * Saves the current player and experienced events to the given file.
-     *
-     * @param path the file to write to
-     * @throws IOException if the file cannot be written
-     */
-    public void saveGame(String path) throws IOException {
-        jsonWriter.saveGame(player, eventLibrary, path);
-    }
-
-    /**
-     * Loads the player and experienced events from the default file,
-     * replacing the current game state.
-     *
-     * @throws IOException if the file cannot be read
-     */
-    public void loadGame() throws IOException {
-        loadGame(filePath);
-    }
-
-    /**
-     * Loads the player and experienced events from the given file,
-     * replacing the current game state.
-     *
-     * @param path the file to read from
-     * @throws IOException if the file cannot be read
-     */
     public void loadGame(String path) throws IOException {
-        this.filePath = path;
-        this.jsonReader = new JsonReader(path);
-
+        filePath = path;
         EventLibrary loadedLibrary = new EventLibrary();
-        this.player = jsonReader.loadGame(path, loadedLibrary);
-        this.eventLibrary = loadedLibrary;
+        player = new JsonReader(path).loadGame(path, loadedLibrary);
+        eventLibrary = loadedLibrary;
+        eventLibrary.setPlayer(player);
+        lastEvent = null;
+        updateAchievements();
+    }
 
-        this.lastEventAge = Math.max(0, this.player.getPlayerAge() - 1);
+    private void updateAchievements() {
+        int age = player.getPlayerAge();
+        if (age >= 1) { player.addAchieveMent("First Turn"); }
+        if (age >= 18) { player.addAchieveMent("Coming of Age"); }
+        if (age >= 50) { player.addAchieveMent("Half a Century"); }
+        if (player.getWisdom() >= 85) { player.addAchieveMent("Old Soul"); }
+        if (player.getPlayerMood() >= 90) { player.addAchieveMent("Radiant Heart"); }
+        if (age >= FINAL_AGE) { player.addAchieveMent("A Life Remembered"); }
     }
 }

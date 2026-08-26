@@ -63,7 +63,12 @@ public class JsonReader {
         player.setWisdom(wisdom);
         player.setPlayerMood(mood);
         player.setPlayerSan(san);
-        player.achievementMade();
+        JSONArray achievements = jsonObject.optJSONArray("AchievementMade");
+        if (achievements != null) {
+            for (int i = 0; i < achievements.length(); i++) {
+                player.addAchieveMent(achievements.getString(i));
+            }
+        }
         return player;
     }
 
@@ -104,6 +109,7 @@ public class JsonReader {
             prerequisites.add(prerequistieJson.getString(i));
         }
         Event event = new Event(eventDescription, minAge, maxAge, sanChange, moodChange, wisdomChange, eventCode);
+        event.withCategory(eventJson.optString("category", event.getCategory()));
         for (String p : prerequisites) {
             event.addPrerequisite(p);
         }
