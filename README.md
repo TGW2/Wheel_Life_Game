@@ -44,11 +44,4 @@ The suite currently contains 43 model and persistence tests.
 - `ui.GamePanel` provides the custom-rendered Swing presentation, main menu, wheel animation, HUD, journal, and epilogue.
 - `src/main/resources/images/wanderer.png` is an original generated production asset bundled on the classpath.
 
-## Release status
 
-The project is a polished, complete desktop game vertical slice and builds as a distributable JAR. A commercial Steam release still requires platform packaging/signing, a Steamworks app ID and SDK integration, store capsule art/screenshots, localization, accessibility QA, audio/music licensing, controller validation, and platform-specific testing. Those are publishing operations rather than missing core gameplay.
-
-## Credits
-
-Design and original prototype: project-g6h9c contributors.
-Production redesign, original event writing, UI implementation, and generated character direction: 2026.
